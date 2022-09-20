@@ -3,5 +3,10 @@
 {% block title %}Hello BienvenueController!{% endblock %}
 
 {% block body %}
-<p>Bienvenue dans le cours Symfony</p>
+    <p>Bienvenue dans le cours Symfony</p>
+    <ul>
+        <li><a href="{{ path('app_bienvenue_personne', {'nom': 'Pierre'}) }}">Pierre</a></li>
+        <li><a href="{{ path('app_bienvenue_personne', {'nom': 'Jean'}) }}">Jean</a></li>
+        <li><a href="{{ path('app_bienvenue_personne', {'nom': 'Paul'}) }}">Paul</a></li>
+    </ul>
 {% endblock %}

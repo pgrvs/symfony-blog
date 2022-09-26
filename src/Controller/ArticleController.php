@@ -9,6 +9,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleController extends AbstractController
 {
+    private ArticleRepository $articleRepository;
+    //Demander a Symfony d'indentifier une instance de ArticleRepository
+    /**
+     * @param ArticleRepository $articleRepository
+     */
+    public function __construct(ArticleRepository $articleRepository)
+    {
+        $this->articleRepository = $articleRepository;
+    }
+
     #[Route('/articles', name: 'app_articles')]
     // A l'appel de la méthode getArticles symfony va créer un
     // objet de la classe ArticleRepository et passer en paramètre de la méthode
@@ -19,19 +29,19 @@ class ArticleController extends AbstractController
         // Le contrôleur fait appel au modèle (classe du modèle)
         // afin de récupérer la liste des articles
 
-        $articles = $repository->findBy([],['createdAt' => 'DESC'],5);
+        $articles = $this->articleRepository->findBy([],['createdAt' => 'DESC']);
 
         return $this->render('article/index.html.twig',[
             "articles" => $articles,
         ]);
     }
 
-    #[Route('/article/{id}', name: 'app_article_id')]
-    public function getArticle(ArticleRepository $repository, $id): Response
+    #[Route('/article/{slug}', name: 'app_article_slug')]
+    public function getArticle(ArticleRepository $repository, $slug): Response
     {
-        $article = $repository->find($id);
+        $article = $this->articleRepository->findOneBy(["slug" => $slug]);
 
-        return $this->render('article/article-id.html.twig',[
+        return $this->render('article/article.html.twig',[
             "article" => $article
         ]);
     }

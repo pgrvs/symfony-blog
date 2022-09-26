@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des articles{% endblock %}
+{% block title %}Hello AccueilController!{% endblock %}
 
 {% block body %}
-    <h1 class="my-3">Liste des articles</h1>
+<h1 class="my-3">Accueil</h1>
     <ul class="list-group">
         {% for article in articles %}
             <li class="list-group-item list-group-item-action"><a href="{{ path('app_article_slug', {'slug': article.slug}) }}">{{ article.titre }}</a></li>

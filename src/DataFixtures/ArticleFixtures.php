@@ -17,7 +17,8 @@ class ArticleFixtures extends Fixture
         for ($i=0;$i<50;$i++){
             $article = new Article();
             $article->setTitre($faker->words($faker->numberBetween(3,10),true))
-                    ->setContenu($faker->paragraphs(3,true));
+                    ->setContenu($faker->paragraphs(3,true))
+                    ->setCreatedAt($faker->dateTimeBetween('-6months'));
 
             // Générer l'ordre INSERT
             // INSERT INTO article values ("Titre 1","Contenu de l'article 1")

@@ -31,6 +31,6 @@ class Auteur {
 
 Article"0..*"--"0..1"Categorie
 Article"1..1"--"0..*"Commentaire
-Commentaire"0..*"--"0..1"Auteur
+Commentaire"1..*"--"0..1"Auteur
 
 @enduml

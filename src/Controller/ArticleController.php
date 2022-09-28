@@ -23,7 +23,7 @@ class ArticleController extends AbstractController
     // A l'appel de la méthode getArticles symfony va créer un
     // objet de la classe ArticleRepository et passer en paramètre de la méthode
     // Mécanisme : INJECTION DE DEPENDANCES
-    public function getArticles(ArticleRepository $repository): Response
+    public function getArticles(): Response
     {
         // Récupérer les information dans la base de données
         // Le contrôleur fait appel au modèle (classe du modèle)
@@ -37,7 +37,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/{slug}', name: 'app_article_slug')]
-    public function getArticle(ArticleRepository $repository, $slug): Response
+    public function getArticle($slug): Response
     {
         $article = $this->articleRepository->findOneBy(["slug" => $slug]);
 

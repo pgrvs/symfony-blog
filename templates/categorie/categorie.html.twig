@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.titre }}{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="my-3">Articles de la catégorie {{ categorie.titre }}</h1>
+        <span class="badge bg-primary">{{ categorie.articles | length }}
+        {% if categorie.articles | length < 2 %}
+            article trouvé
+        {% else %}
+            articles trouvés
+        {% endif %}
+        </span>
+    </div>
+
+    <div class="container">
+        <div class="list-group">
+            {% for article in categorie.articles %}
+                <a href="{{ path('app_article_slug', {'slug': article.slug}) }}" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ article.titre }}</h5>
+                        <small>{{ article.createdAt|date("d/m/Y") }}</small>
+                    </div>
+                    <p class="mb-1">{{ article.contenu }}</p>
+                    <small>{# nb commentaire #}</small>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -4,9 +4,12 @@
 
 {% block body %}
 <h1 class="my-3">Accueil</h1>
-    <ul class="list-group">
+    <div class="alert alert-primary text-center" role="alert">
+        Bienvenue sur le blog !
+    </div>
+    <div class="list-group">
         {% for article in articles %}
-            <li class="list-group-item list-group-item-action"><a href="{{ path('app_article_slug', {'slug': article.slug}) }}">{{ article.titre }}</a></li>
+            <a class="list-group-item list-group-item-action" href="{{ path('app_article_slug', {'slug': article.slug}) }}">{{ article.titre }}</a>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

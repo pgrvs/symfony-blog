@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+    <h1 class="my-3">Liste des catégories</h1>
+    <ul class="list-group">
+        {% for categorie in categories %}
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ categorie.titre }}
+                ({{ categorie.articles | length }}
+                {% if categorie.articles | length < 2 %}
+                    article)
+                {% else %}
+                    articles)
+                {% endif %}
+                <a class="btn btn-primary" href="{{ path('app_categorie_slug' ,{'slug': categorie.slug}) }}" role="button">Voir</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

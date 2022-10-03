@@ -25,9 +25,9 @@ class AuteurFixtures extends Fixture
 
         for ($i=0; $i<=8;$i++){
             $auteur = new Auteur();
-            $auteur->setNom($faker->);
+            /*$auteur->setNom($faker->l);
             $auteur->getPrenom($faker->);
-            $auteur->setPseudo($faker->);
+            $auteur->setPseudo($faker->);*/
 
             $this->addReference("auteur".$i,$auteur);
 

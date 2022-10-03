@@ -9,4 +9,7 @@
             <a class="list-group-item list-group-item-action" href="{{ path('app_article_slug', {'slug': article.slug}) }}">{{ article.titre }}</a>
         {% endfor %}
     </div>
+    <div class="navigation mt-3 d-flex justify-content-center">
+        {{ knp_pagination_render(articles) }}
+    </div>
 {% endblock %}

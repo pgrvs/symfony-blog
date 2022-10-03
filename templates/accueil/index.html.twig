@@ -9,7 +9,7 @@
     </div>
     <div class="list-group">
         {% for article in articles %}
-            <a class="list-group-item list-group-item-action" href="{{ path('app_article_slug', {'slug': article.slug}) }}">{{ article.titre }}</a>
+            <a class="list-group-item list-group-item-action" href="{{ path('app_articles_slug', {'slug': article.slug}) }}">{{ article.titre }}</a>
         {% endfor %}
     </div>
 {% endblock %}

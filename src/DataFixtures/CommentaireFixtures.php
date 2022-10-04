@@ -30,6 +30,18 @@ class CommentaireFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($commentaire);
         }
 
+        for ($i=0;$i<10;$i++){
+            $commentaire = new Commentaire();
+            $commentaire->setContenu($faker->paragraphs(1,true))
+                ->setCreatedAt($faker->dateTimeBetween('-6months'));
+
+            $numArticle = $faker->numberBetween(0,100);
+            $commentaire->setArticle($this->getReference("article".$numArticle));
+
+
+            $manager->persist($commentaire);
+        }
+
         $manager->flush();
     }
 

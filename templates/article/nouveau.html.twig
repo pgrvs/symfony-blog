@@ -3,33 +3,39 @@
 {% block title %}Nouvel article{% endblock %}
 
 {% block body %}
-
     <h1 class="mt-3">Création d'un article</h1>
     {{ form_start(formArticle) }}
-        {# champs titre #}
-        {{ form_row(formArticle.titre, {
-            'label' : 'Titre article',
-            'attr' : {
-                'placeholder' : 'Veuillez saisir le titre de l\'article'
-            },
-            'help' : "Le titre doit contenir au moins 5 caractères"
-        }) }}
+    {# ------champs titre------- #}
+    {{ form_row(formArticle.titre, {
+        'label' : 'Titre article',
+        'label_attr' : {
+            'class' : 'text-primary mt-3'
+        },
+        'attr' : {
+            'placeholder' : 'Veuillez saisir le titre de l\'article'
+        },
+        'help' : "Le titre doit contenir au moins 5 caractères"
+    }) }}
 
-        {# champs contenu #}
-        {{ form_label(formArticle.contenu, "Le contenue de l'article", {
-            'label_attr' : {
-                'class' : 'text-primary'
-            }
-        }) }}
-        {{ form_widget(formArticle.contenu, {'attr': {'placeholder' : 'Veuillez saisir le contenu de l\'article'}}) }}
-        {{ form_help(formArticle.contenu, {'help' : "Le contenu doit ..."}) }}
-        {# champs catégorie #}
+    {# -------champs contenu------- #}
+    {{ form_label(formArticle.contenu, "Le contenue de l'article", {
+        'label_attr' : {
+            'class' : 'text-primary'
+        }
+    }) }}
+    {{ form_widget(formArticle.contenu, {'attr': {'placeholder' : 'Veuillez saisir le contenu de l\'article'}}) }}
+    {{ form_help(formArticle.contenu, {'help' : "Le contenu doit ..."}) }}
 
-        {{ form_row(formArticle.categorie) }}
+    {# -------champs catégorie------- #}
+    {{ form_row(formArticle.categorie, {
+        'label' : 'Catégorie',
+        'label_attr' : {
+            'class' : 'text-primary mt-3'
+        }
+    }) }}
 
-        <input type="submit" class="btn btn-primary mt-2" value="Ajouter">
+    <input type="submit" class="btn btn-primary mt-2" value="Ajouter">
     {{ form_end(formArticle) }}
-
 
 {% endblock %}
 

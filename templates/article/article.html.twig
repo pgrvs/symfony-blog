@@ -19,12 +19,18 @@
         <h3>Contenue</h3>
             <p>{{ article.contenu }}</p>
 
+    {# Button Modal #}
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Commentaire
+        {{ article.commentaires | length }}
+        {% if article.commentaires | length < 2 %}
+            Commentaire
+        {% else %}
+            Commentaires
+        {% endif %}
     </button>
 
-    <!-- Modal -->
-    {% for commentaire in article.commentaires %}
+    {# Modal #}
+    {% if article.commentaires | length > 0 %}
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -33,13 +39,26 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {{ commentaire.contenu }}
+                        {% for commentaire in article.commentaires %}
+                            <figure>
+                                <blockquote class="blockquote">
+                                    <p> {{ commentaire.contenu }}</p>
+                                </blockquote>
+                                <figcaption class="blockquote-footer">
+                                   {% if commentaire.auteur is not null%}
+                                       {{ commentaire.auteur.pseudo }}
+                                    {% else %}
+                                        Anonyme
+                                    {% endif %}
+                                </figcaption>
+                        {% endfor %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
                     </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
+    {% endif %}
+
 {% endblock %}

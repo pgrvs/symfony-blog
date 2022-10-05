@@ -37,7 +37,7 @@ class ArticleController extends AbstractController
 
         // Mise en place de la pagination
         $articles = $paginator->paginate(
-            $this->articleRepository->findBy([],['createdAt' => 'DESC']),
+            $this->articleRepository->findBy(["publie" => true], ['createdAt' => 'DESC']),
             $request->query->getInt('page', 1), /*page number*/
             10 /*limit per page*/
         );
@@ -50,10 +50,13 @@ class ArticleController extends AbstractController
     #[Route('/articles/{slug}', name: 'app_articles_slug')]
     public function getArticle($slug): Response
     {
-        $article = $this->articleRepository->findOneBy(["slug" => $slug]);
-        return $this->render('article/article.html.twig',[
-            "article" => $article
-        ]);
+        $article = $this->articleRepository->findOneBy(["slug" => $slug, "publie" => true]);
+        if ($article) {
+            return $this->render('article/article.html.twig',[
+                "article" => $article
+            ]);
+        }
+        return $this->redirectToRoute('app_articles');
     }
 
     #[Route('/articles/nouveau', name: 'app_articles_nouveau', methods: ['GET', 'POST'], priority: 1)]

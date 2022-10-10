@@ -17,7 +17,7 @@
         {% endif %}
 
         <h3>Contenue</h3>
-            <p>{{ article.contenu }}</p>
+            <p>{{ article.contenu | raw }}</p>
 
     {# Button Modal #}
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

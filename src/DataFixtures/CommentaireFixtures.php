@@ -30,12 +30,12 @@ class CommentaireFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($commentaire);
         }
 
-        for ($i=0;$i<10;$i++){
+        for ($i=0;$i<30;$i++){
             $commentaire = new Commentaire();
             $commentaire->setContenu($faker->paragraphs(1,true))
                 ->setCreatedAt($faker->dateTimeBetween('-6months'));
 
-            $numArticle = $faker->numberBetween(0,100);
+            $numArticle = $faker->numberBetween(0,99);
             $commentaire->setArticle($this->getReference("article".$numArticle));
 
 

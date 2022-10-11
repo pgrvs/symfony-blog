@@ -14,9 +14,9 @@
         </span>
     </div>
 
-    <div class="container">
+    <div class="container mb-5">
         <div class="list-group">
-            {% for article in categorie.articles %}
+            {% for article in articles %}
                 <a href="{{ path('app_articles_slug', {'slug': article.slug}) }}" class="list-group-item list-group-item-action" aria-current="true">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ article.titre }}</h5>

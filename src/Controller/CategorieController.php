@@ -26,7 +26,19 @@ class CategorieController extends AbstractController
     #[Route('/categories', name: 'app_categories')]
     public function getCategories(): Response
     {
-        $categories = $this->categorieRepository->findBy([],["titre" => "ASC"]);
+        $categoriesDB = $this->categorieRepository->findBy([],["titre" => "ASC"]);
+        $categories = [];
+
+        foreach ($categoriesDB as $categorie){
+            $nombreArticle = 0;
+            foreach ($categorie->getArticles() as $article){
+                if($article->isPublie()){
+                   $nombreArticle = $nombreArticle +1;
+                }
+            }
+            $categories[] = ["categorie" => $categorie, "nombreArticle" => $nombreArticle];
+        }
+
         return $this->render('categorie/index.html.twig', [
             'categories' => $categories,
         ]);
@@ -36,9 +48,17 @@ class CategorieController extends AbstractController
     public function index($slug): Response
     {
         $categorie = $this->categorieRepository->findOneBy(["slug" => $slug]);
+        $articles = [];
+
+        foreach ($categorie->getArticles() as $article){
+            if($article->isPublie()){
+                $articles[] = $article;
+            }
+        }
         //dd($categorie);
         return $this->render('categorie/categorie.html.twig',[
-            "categorie" => $categorie
+            "categorie" => $categorie,
+            "articles" => $articles
         ]);
     }
 }

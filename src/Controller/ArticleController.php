@@ -63,12 +63,9 @@ class ArticleController extends AbstractController
         $commentaire = new Commentaire();
         $formCommentaire = $this->createForm(CommentaireType::class, $commentaire);
 
-        // Reconnaitre si le formulaire a été soumis ou pas
         $formCommentaire->handleRequest($request);
-        // Est-ce que le formulaire a été soumis
         if ($formCommentaire->isSubmitted() && $formCommentaire->isValid()){
             $commentaire->setCreatedAt(new \DateTime());
-            // Insérer l'article dans la base de données
             $this->commentaireRepository->add($commentaire, true);
             return $this->redirectToRoute("app_articles_slug", ['slug' => $slug]);
         }

@@ -3,5 +3,13 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-
+    <h1 class="mt-3">Contact</h1>
+    {{ form_start(formContact) }}
+    {{ form_row(formContact.prenom) }}
+    {{ form_row(formContact.nom) }}
+    {{ form_row(formContact.email) }}
+    {{ form_row(formContact.objet) }}
+    {{ form_row(formContact.contenu) }}
+    <input type="submit" class="btn btn-primary mt-2 mb-3" value="Envoyer">
+    {{ form_end(formContact) }}
 {% endblock %}
